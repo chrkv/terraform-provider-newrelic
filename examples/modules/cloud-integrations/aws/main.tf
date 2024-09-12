@@ -310,21 +310,21 @@ resource "aws_iam_role_policy_attachment" "newrelic_configuration_recorder" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWS_ConfigRole"
 }
 
-resource "aws_config_configuration_recorder" "newrelic_recorder" {
-  name     = "newrelic_configuration_recorder-${var.name}"
-  role_arn = aws_iam_role.newrelic_configuration_recorder.arn
-}
+# resource "aws_config_configuration_recorder" "newrelic_recorder" {
+#   name     = "newrelic_configuration_recorder-${var.name}"
+#   role_arn = aws_iam_role.newrelic_configuration_recorder.arn
+# }
 
-resource "aws_config_configuration_recorder_status" "newrelic_recorder_status" {
-  name       = aws_config_configuration_recorder.newrelic_recorder.name
-  is_enabled = true
-  depends_on = [aws_config_delivery_channel.newrelic_recorder_delivery]
-}
+# resource "aws_config_configuration_recorder_status" "newrelic_recorder_status" {
+#   name       = aws_config_configuration_recorder.newrelic_recorder.name
+#   is_enabled = true
+#   depends_on = [aws_config_delivery_channel.newrelic_recorder_delivery]
+# }
 
-resource "aws_config_delivery_channel" "newrelic_recorder_delivery" {
-  name           = "newrelic_configuration_recorder-${var.name}"
-  s3_bucket_name = aws_s3_bucket.newrelic_configuration_recorder_s3.bucket
-  depends_on = [
-    aws_config_configuration_recorder.newrelic_recorder
-  ]
-}
+# resource "aws_config_delivery_channel" "newrelic_recorder_delivery" {
+#   name           = "newrelic_configuration_recorder-${var.name}"
+#   s3_bucket_name = aws_s3_bucket.newrelic_configuration_recorder_s3.bucket
+#   depends_on = [
+#     aws_config_configuration_recorder.newrelic_recorder
+#   ]
+# }
